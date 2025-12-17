@@ -104,5 +104,119 @@ namespace UnitTest.ProductApi.Controllers
 
             responseResult!.Message.Should().Be("Created");
         }
+
+        [Fact]
+        public async Task CreateProduct_WhenCreateFails_ReturnBadReqeustResponse()
+        {
+            //Arrange
+            var productDto = new ProductDto(1, "Product 1", 45.36m, 78);
+            var response = new Response(false, "Failed");
+
+            //Act
+            A.CallTo(() => _product.CreateAsync(A<Product>.Ignored)).Returns(response);
+            var result = await _productsController.CreateProduct(productDto);
+
+            //Assert
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+            badRequestResult.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+
+            var responseResult = badRequestResult.Value as Response;
+            responseResult.Should().NotBeNull();
+            responseResult.Message.Should().Be("Failed");
+            response.Flag.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task UpdateProduct_whenUpdateIsSuccessfull_ReturnOkResponse()
+        {
+            //Arrange
+            var productDto = new ProductDto(1, "Product 1", 45.36m, 78);
+            var response = new Response(true, "Update");
+
+            //Act
+            A.CallTo(() => _product.UpdateAsync(A<Product>.Ignored)).Returns(response);
+            var result = await _productsController.UpdateProduct(productDto);
+
+            //Asssert
+            var okResult = result.Result as OkObjectResult;
+
+            okResult.Should().NotBeNull();
+            okResult.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+            var responseResult = okResult.Value as Response;
+
+            responseResult!.Message.Should().Be("Update");
+            response.Flag.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task UpdateProduct_WhenUpdateFails_ReturnBadRequestResponse()
+        {
+            //Arrange
+            var productDto = new ProductDto(1, "Product 1", 45.36m, 78);
+            var response = new Response(false, "Update Failed");
+
+            //Act
+            A.CallTo(() => _product.UpdateAsync(A<Product>.Ignored)).Returns(response);
+            var result = await _productsController.UpdateProduct(productDto);
+
+            //Assert
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+            badRequestResult.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+
+            var responseResult = badRequestResult.Value as Response;
+            responseResult.Should().NotBeNull();
+            responseResult.Message.Should().Be("Update Failed");
+            response.Flag.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task DeleteProduct_WhenDeleteIsSuccessful_ReturnOkResponse()
+        {
+            //Arrange
+            var productDto = new ProductDto(1, "Product 1", 45.36m, 78);
+            var response = new Response(true, "Deleted Successfully");
+
+            A.CallTo(() => _product.DeleteAsync(A<Product>.Ignored)).Returns(response);
+
+
+            //Act
+            var result = await _productsController.DeleteProduct(productDto);
+
+            //Asssert
+            var okResult = result.Result as OkObjectResult;
+
+            okResult.Should().NotBeNull();
+            okResult.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+            var responseResult = okResult.Value as Response;
+
+            responseResult!.Message.Should().Be("Deleted Successfully");
+            response.Flag.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task DeleteProduct_WhenDeleteFails_ReturnBadRequestResponse()
+        {
+            //Arrange
+            var productDto = new ProductDto(1, "Product 1", 45.36m, 78);
+            var response = new Response(false, "Deleted Failed");
+
+            //Act
+            A.CallTo(() => _product.DeleteAsync(A<Product>.Ignored)).Returns(response);
+            var result = await _productsController.DeleteProduct(productDto);
+
+            //Assert
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+            badRequestResult.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+
+            var responseResult = badRequestResult.Value as Response;
+            responseResult.Should().NotBeNull();
+            responseResult.Message.Should().Be("Deleted Failed");
+            response.Flag.Should().BeFalse();
+        }
     }
 }

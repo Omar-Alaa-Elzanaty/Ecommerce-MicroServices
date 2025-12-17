@@ -3,6 +3,7 @@
     public record ProductDto(
         int Id,
         string Name,
+        int Quantity,
         decimal Price
         );
 }

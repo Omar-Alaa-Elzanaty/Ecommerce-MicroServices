@@ -15,7 +15,7 @@ namespace OrderApi.Application.DTOs.Conversions
 
         public static (OrderDto?,IEnumerable<OrderDto>?)FromEntity(Order? order, IEnumerable<Order>? orders)
         {
-            if(order is not null || order is null)
+            if(order is not null || orders is null)
             {
                 var singleOrder = new OrderDto(
                     Id: order!.Id,
@@ -37,6 +37,8 @@ namespace OrderApi.Application.DTOs.Conversions
                     PurchaseQuantity: o.PurchaseQuantity,
                     OrderDate: o.OrderDate
                 ));
+
+                return (null, _orders);
             }
 
             return (null, null);

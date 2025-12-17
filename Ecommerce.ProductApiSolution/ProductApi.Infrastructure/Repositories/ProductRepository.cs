@@ -26,7 +26,7 @@ namespace ProductApi.Infrastructure.Repositories
                 await context.SaveChangesAsync();
 
                 if (currentEntity is not null && currentEntity.Entity.Id > 0)
-                    return new Response(true, $"{entity.Name}added successfully.");
+                    return new Response(true, $"{entity.Name} added successfully.");
 
                 return new Response(false, "Error occurred adding new product.");
 
@@ -81,7 +81,7 @@ namespace ProductApi.Infrastructure.Repositories
             try
             {
                 var products = await context.Products.ToListAsync();
-                return products is not null ? products : null!;
+                return products is not null&&products.Count()>0 ? products : null!;
             }
             catch (Exception ex)
             {
