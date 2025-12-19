@@ -1,4 +1,4 @@
-﻿using eCommerce.SharedLibrary.Logs;
+﻿using eCommerce.SharedLibrary.LogsException;
 using eCommerce.SharedLibrary.Response;
 using Microsoft.EntityFrameworkCore;
 using ProductApi.Application.Interfaces;

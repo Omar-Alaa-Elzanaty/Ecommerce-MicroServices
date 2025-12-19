@@ -33,7 +33,6 @@ namespace AuthenticationApi.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<GetUserDto>>GetUser(int id)
         {
             if (id <= 0)

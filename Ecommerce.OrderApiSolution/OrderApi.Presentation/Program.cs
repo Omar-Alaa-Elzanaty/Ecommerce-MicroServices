@@ -1,9 +1,11 @@
+using OrderApi.Application.DependencyInjection;
 using OrderApi.Infrastructure.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApplicationService(builder.Configuration);
+builder.Services.AddInfrastructureService(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddInfrastructureService(builder.Configuration);
 
 var app = builder.Build();
 

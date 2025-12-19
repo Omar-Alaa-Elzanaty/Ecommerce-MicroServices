@@ -5,10 +5,9 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-builder.Services.AddOcelot().AddCacheManager(x =>
+builder.Services.AddOcelot(builder.Configuration).AddCacheManager(x =>
 {
     x.WithDictionaryHandle();
 });
@@ -22,6 +21,8 @@ builder.Services.AddCors(o =>
          .AllowAnyHeader();
     });
 });
+
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseCors();

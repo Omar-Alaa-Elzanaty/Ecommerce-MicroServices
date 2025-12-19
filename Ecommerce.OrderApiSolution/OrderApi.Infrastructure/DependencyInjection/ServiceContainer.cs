@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderApi.Application.Interfaces;
+using OrderApi.Application.Services;
 using OrderApi.Infrastructure.Data;
 using OrderApi.Infrastructure.Repositories;
+using Polly;
 using System.Runtime.CompilerServices;
 
 namespace OrderApi.Infrastructure.DependencyInjection

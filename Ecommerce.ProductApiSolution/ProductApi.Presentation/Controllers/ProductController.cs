@@ -16,7 +16,7 @@ namespace ProductApi.Presentation.Controllers
         {
             var products = await productInterface.GetAllAsync();
 
-            if (!products.Any())
+            if (products != null &&!products.Any())
                 return NotFound("No products detected in the database.");
 
             var (_, list) = ProductConversions.FromEntity(null!, products);

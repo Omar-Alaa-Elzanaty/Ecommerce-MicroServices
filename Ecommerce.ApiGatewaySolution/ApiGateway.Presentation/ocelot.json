@@ -15,14 +15,14 @@
       "RateLimitOptions": {
         "ClientWhitelist": [],
         "EnableRateLimiting": true,
-        "Period": "60s",
+        "Period": "10s",
         "Limit": 1,
         "PeriodTimespan": 10
       }
     },
     //Product Service
     {
-      "DownstreamPathTemplate": "/api/products/",
+      "DownstreamPathTemplate": "/api/product/",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -30,17 +30,17 @@
           "Port": 7167
         }
       ],
-      "UpstreamPathTemplate": "/api/products/",
+      "UpstreamPathTemplate": "/api/product/",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
-        "TtlSeconds": 60,
+        "TtlSeconds": 10,
         "Region": "default",
         "Header": "eCommerce-Caching-Control"
       }
     },
     //Get By ID Product Service
     {
-      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamPathTemplate": "/api/product/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -48,17 +48,17 @@
           "Port": 7167
         }
       ],
-      "UpstreamPathTemplate": "/api/products/{id}",
+      "UpstreamPathTemplate": "/api/product/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
-        "TtlSeconds": 60,
+        "TtlSeconds": 10,
         "Region": "default",
         "Header": "eCommerce-Caching-Control"
       }
     },
     //Post,Put,Delete Product Service
     {
-      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamPathTemplate": "/api/product/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -66,7 +66,7 @@
           "Port": 7167
         }
       ],
-      "UpstreamPathTemplate": "/api/products/{everything}",
+      "UpstreamPathTemplate": "/api/product/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -75,18 +75,18 @@
     },
     //Order Service Get
     {
-      "DownstreamPathTemplate": "/api/orders/",
+      "DownstreamPathTemplate": "/api/order/",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5055
+          "Port": 7179
         }
       ],
-      "UpstreamPathTemplate": "/api/orders/",
+      "UpstreamPathTemplate": "/api/order/",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
-        "TtlSeconds": 60,
+        "TtlSeconds": 10,
         "Region": "default",
         "Header": "eCommerce-Caching-Control"
       },
@@ -97,18 +97,18 @@
     },
     //Order Service Get By ID
     {
-      "DownstreamPathTemplate": "/api/orders/{id}",
+      "DownstreamPathTemplate": "/api/order/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5055
+          "Port": 7179
         }
       ],
-      "UpstreamPathTemplate": "/api/orders/{id}",
+      "UpstreamPathTemplate": "/api/order/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
-        "TtlSeconds": 60,
+        "TtlSeconds": 10,
         "Region": "default",
         "Header": "eCommerce-Caching-Control"
       },
@@ -119,15 +119,15 @@
     },
     //Order Service Post, Put, Delete
     {
-      "DownstreamPathTemplate": "/api/orders/{everything}",
+      "DownstreamPathTemplate": "/api/order/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5055
+          "Port": 7179
         }
       ],
-      "UpstreamPathTemplate": "/api/orders/{everything}",
+      "UpstreamPathTemplate": "/api/order/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProvider": "Bearer",
@@ -136,7 +136,7 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7099",
+    "BaseUrl": "http://localhost:5030",
     "RateLimitOptions": {
       "QuotaExceededMessage": "You have exceeded the allowed number of requests. Please try again later."
     }

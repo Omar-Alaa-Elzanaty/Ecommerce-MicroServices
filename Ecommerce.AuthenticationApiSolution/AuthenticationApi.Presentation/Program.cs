@@ -14,11 +14,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-
-app.UseInfrastructurePolicy();
 app.UseHttpsRedirection();
+app.UseRouting();
+//app.UseInfrastructurePolicy();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

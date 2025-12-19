@@ -1,4 +1,4 @@
-﻿using eCommerce.SharedLibrary.Logs;
+﻿using eCommerce.SharedLibrary.LogsException;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderApi.Application.Services;
@@ -13,8 +13,7 @@ namespace OrderApi.Application.DependencyInjection
         {
             services.AddHttpClient<IOrderService, OrderService>(o =>
             {
-                o.BaseAddress=new Uri(config["ApiGateway:BaseAddress"]!);
-                o.Timeout = TimeSpan.FromSeconds(1);
+                o.DefaultRequestHeaders.Add("Api-Gateway","y");
             });
 
             var retryStrategy = new RetryStrategyOptions()
